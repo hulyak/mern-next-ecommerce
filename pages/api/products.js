@@ -1,10 +1,12 @@
-import products  from '../../static/products.json';
+// import products  from '../../static/products.json';
+import Product from '../../models/Product'
 import connectDb from '../../utils/connectDb';
 
 // connect to database
 connectDb();
 
-export default (req, res) => {
+export default async (req, res) => {
     // console.log(req.method) // GET
-    res.status(200).json(products)
+    const products = await Product.find();
+     res.status(200).json(products);
 }
