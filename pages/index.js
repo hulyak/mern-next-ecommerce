@@ -1,17 +1,20 @@
 import axios from 'axios';
+import Meta from '../components/_App/Meta';
 
 function Home({ products }) {
   console.log(products);
-  return <>home</>;
+  return (
+    <>
+      <Meta />
+      home
+    </>
+  );
 }
 
-// initial props will be added to Home component's props
-Home.getInitialProps = async () => {
-  // fetch data on server
-  // return response data as an object, because props is an object
+export const getStaticProps = async (context) => {
   const url = 'http://localhost:3000/api/products';
   const res = await axios.get(url);
-  return { products: res.data };
-  // note: this object will be merged with existing props
+  return { props: { products: res.data } };
 };
+
 export default Home;

@@ -1,5 +1,6 @@
-import { Menu, Container, Image, Icon } from 'semantic-ui-react';
+import { Menu, Container, Icon } from 'semantic-ui-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import Router, { useRouter } from 'next/router';
 import NProgress from 'nprogress';
 
@@ -19,11 +20,7 @@ function Header() {
       <Container text>
         <Link href='/'>
           <Menu.Item header active={isActive('/')}>
-            <Image
-              size='mini'
-              src='static/logo.svg'
-              style={{ marginRight: '1em' }}
-            />
+            <Image width={60} height={50} src='/logo.png' />
             Pay What You Want
           </Menu.Item>
         </Link>
