@@ -1,11 +1,12 @@
 import axios from 'axios';
+import ProductList from '../components/Index/ProductList';
 import Meta from '../components/_App/Meta';
 
 function Home({ products }) {
-  console.log(products);
   return (
     <>
       <Meta />
+      <ProductList product={products} />
       home
     </>
   );

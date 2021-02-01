@@ -1,9 +1,7 @@
 import mongoose from 'mongoose';
 import shortId from 'shortId';
 
-const { String, Number } = mongoose.Schema.Types;
-
-const ProductsSchema = new mongoose.Schema({
+const ProductsSchema = mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -27,7 +25,8 @@ const ProductsSchema = new mongoose.Schema({
   },
 });
 
-
 // if we have already a Product model use it otherwise create a new one.
-export default mongoose.models.Product ||
-  mongoose.model('Product', ProductsSchema);
+const Product =
+  mongoose.models.Product || mongoose.model('Product', ProductsSchema);
+
+export default Product;
