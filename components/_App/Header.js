@@ -8,37 +8,37 @@ Router.onRouteChangeComplete = () => NProgress.done();
 Router.onRouteChangeError = () => NProgress.done();
 
 function Header() {
-  const user = true;
+  const user = false;
   const router = useRouter();
 
-  function isActive(route){
+  function isActive(route) {
     return route === router.pathname;
   }
   return (
-    <Menu fluid id="menu" inverted>
+    <Menu fluid id='menu' inverted>
       <Container text>
-        <Link href="/">
-           <Menu.Item header active={isActive('/')}>
+        <Link href='/'>
+          <Menu.Item header active={isActive('/')}>
             <Image
-              size="mini"
-              src="static/logo.svg"
+              size='mini'
+              src='static/logo.svg'
               style={{ marginRight: '1em' }}
             />
-            ReactReserve
+            Pay What You Want
           </Menu.Item>
         </Link>
 
-        <Link href="/cart">
+        <Link href='/cart'>
           <Menu.Item header active={isActive('/cart')}>
-            <Icon name="cart" size="large" />
+            <Icon name='cart' size='large' />
             Cart
           </Menu.Item>
         </Link>
 
         {user && (
-          <Link href="/create">
+          <Link href='/create'>
             <Menu.Item header active={isActive('/create')}>
-              <Icon name="add square" size="large" />
+              <Icon name='add square' size='large' />
               Create
             </Menu.Item>
           </Link>
@@ -46,30 +46,30 @@ function Header() {
 
         {user ? (
           <>
-            <Link href="/account">
+            <Link href='/account'>
               <Menu.Item header active={isActive('/account')}>
-                <Icon name="user" size="large" />
+                <Icon name='user' size='large' />
                 Account
               </Menu.Item>
             </Link>
 
             <Menu.Item header>
-              <Icon name="sign out" size="large" />
+              <Icon name='sign out' size='large' />
               Logout
             </Menu.Item>
           </>
         ) : (
           <>
-            <Link href="/login">
+            <Link href='/login'>
               <Menu.Item header active={isActive('/login')}>
-                <Icon name="sign in" size="large" />
+                <Icon name='sign in' size='large' />
                 Login
               </Menu.Item>
             </Link>
 
-            <Link href="/signup">
+            <Link href='/signup'>
               <Menu.Item header active={isActive('/signup')}>
-                <Icon name="signup" size="large" />
+                <Icon name='signup' size='large' />
                 Sign Up
               </Menu.Item>
             </Link>
