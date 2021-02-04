@@ -1,7 +1,7 @@
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 import axios from 'axios';
-import ProductSummary from '../components/Product/ProductSummary';
-import ProductAttributes from '../components/Product/ProductAttributes';
+import ProductAttributes from '../../components/Product/ProductAttributes';
+import ProductSummary from '../../components/Product/ProductSummary';
 
 function Product({ product }) {
   // const router = useRouter();
@@ -15,7 +15,8 @@ function Product({ product }) {
   );
 }
 
-export async function getServerSideProps({ params: { _id } }) {
+export async function getServerSideProps(context) {
+  const { _id } = context.query;
   const url = `http://localhost:3000/api/product/${_id}`;
   const res = await axios.get(url);
   // server side rendering

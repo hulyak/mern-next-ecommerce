@@ -21,7 +21,7 @@ function Header() {
         <Link href='/'>
           <Menu.Item header active={isActive('/')}>
             <Image width={60} height={50} src='/logo.png' />
-            Pay What You Want
+            NextShop
           </Menu.Item>
         </Link>
 

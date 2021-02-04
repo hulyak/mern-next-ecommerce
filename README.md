@@ -1,1 +1,1 @@
-# MERN Stack - The Complete Guide
+# MERN Stack with NEXT E-Commerce
