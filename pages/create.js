@@ -19,9 +19,10 @@ const initialState = {
 
 function CreateProduct() {
   const [product, setProduct] = useState(initialState);
-
   const [mediaPreview, setMediaPreview] = useState('');
+  const [successMessage, setSuccessMessage] = useState(false);
 
+  // input onChange event handler
   const handleChange = (event) => {
     const { name, value, files } = event.target;
     if (name === 'media') {
@@ -29,8 +30,16 @@ function CreateProduct() {
       setMediaPreview(window.URL.createObjectURL(files[0])); // create img preview
     } else {
       setProduct((prev) => ({ ...prev, [name]: value }));
-      console.log(product);
     }
+  };
+
+  // submit form
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // clear input fields
+    setProduct(initialState);
+    setSuccessMessage(true);
+    console.log(product);
   };
 
   return (
@@ -39,7 +48,13 @@ function CreateProduct() {
         <Icon name='add' color='orange' />
         Create New Product
       </Header>
-      <Form>
+      <Form onSubmit={handleSubmit} success={successMessage}>
+        <Message
+          success
+          icon='check'
+          header='Success'
+          content='Your product has been created'
+        />
         <Form.Group widths='equal'>
           <Form.Field
             control={Input}
@@ -48,6 +63,7 @@ function CreateProduct() {
             placeholder='Name'
             type='text'
             onChange={handleChange}
+            value={product.name}
           />
           <Form.Field
             control={Input}
@@ -58,6 +74,7 @@ function CreateProduct() {
             step='0.01'
             type='number'
             onChange={handleChange}
+            value={product.price}
           />
           <Form.Field
             control={Input}
@@ -76,6 +93,8 @@ function CreateProduct() {
           name='description'
           label='Description'
           placeholder='Description'
+          onChange={handleChange}
+          value={product.description}
         />
 
         <Form.Field
