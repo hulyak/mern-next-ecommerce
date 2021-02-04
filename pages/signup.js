@@ -2,6 +2,9 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { Button, Form, Icon, Message, Segment } from 'semantic-ui-react';
 import catchErrors from '../utils/catchErrors';
+import baseUrl from '../utils/baseUrl';
+import axios from 'axios';
+import { handleLogin } from '../utils/auth';
 
 const initialState = {
   name: '',
@@ -30,14 +33,20 @@ function Signup() {
     try {
       setLoading(true);
       setError('');
-      console.log(user);
+      // console.log(user);
       // make request to sign up user
+      const url = `${baseUrl}/api/signup`;
+      const payload = { ...user };
+      const response = await axios.post(url, payload);
+      // store token in users cookies
+      handleLogin(response.data);
     } catch (error) {
       catchErrors(error, setError);
     } finally {
       setLoading(false);
     }
   };
+
   return (
     <>
       <Message
