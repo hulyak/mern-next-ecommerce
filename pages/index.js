@@ -1,6 +1,7 @@
 import axios from 'axios';
 import ProductList from '../components/Index/ProductList';
 import Meta from '../components/_App/Meta';
+import baseUrl from '../utils/baseUrl';
 
 function Home({ products }) {
   return (
@@ -12,7 +13,7 @@ function Home({ products }) {
 }
 
 export async function getServerSideProps(context) {
-  const url = 'http://localhost:3000/api/products';
+  const url = `${baseUrl}/api/products`;
   const res = await axios.get(url);
   return { props: { products: res.data } };
 }
