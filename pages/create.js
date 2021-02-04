@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useState } from 'react';
 import {
   Button,
@@ -9,6 +10,7 @@ import {
   Image,
   Message,
 } from 'semantic-ui-react';
+import baseUrl from '../utils/baseUrl';
 
 const initialState = {
   name: '',
@@ -21,6 +23,8 @@ function CreateProduct() {
   const [product, setProduct] = useState(initialState);
   const [mediaPreview, setMediaPreview] = useState('');
   const [successMessage, setSuccessMessage] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [disabled, setDisabled] = useState(true);
 
   // input onChange event handler
   const handleChange = (event) => {
@@ -33,13 +37,29 @@ function CreateProduct() {
     }
   };
 
+  const handleImageUpload = async () => {
+    const data = new FormData();
+    data.append('file', product.media);
+    data.append('upload_preset', 'nextshop');
+    data.append('cloud_name', 'dsgtouzfc');
+    const response = await axios.post(process.env.CLOUDINARY_URL, data);
+    const mediaUrl = response.data.url;
+    return mediaUrl;
+  };
+
   // submit form
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
+    const mediaUrl = await handleImageUpload();
+    const url = `${baseUrl}/api/product`;
+    const payload = { ...product, mediaUrl };
+    const response = await axios.post(url, payload);
+    setLoading(false);
+    console.log(response);
     // clear input fields
     setProduct(initialState);
     setSuccessMessage(true);
-    console.log(product);
   };
 
   return (
@@ -48,7 +68,7 @@ function CreateProduct() {
         <Icon name='add' color='orange' />
         Create New Product
       </Header>
-      <Form onSubmit={handleSubmit} success={successMessage}>
+      <Form onSubmit={handleSubmit} success={successMessage} loading={loading}>
         <Message
           success
           icon='check'
@@ -103,6 +123,7 @@ function CreateProduct() {
           icon='pencil alternate'
           content='Submit'
           type='submit'
+          disabled={loading}
         />
       </Form>
     </>
