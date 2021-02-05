@@ -4,14 +4,14 @@ import ProductAttributes from '../../components/Product/ProductAttributes';
 import ProductSummary from '../../components/Product/ProductSummary';
 import baseUrl from '../../utils/baseUrl';
 
-function Product({ product }) {
+function Product({ product, user }) {
   // const router = useRouter();
   // const { _id } = router.query;
 
   return (
     <>
       <ProductSummary {...product} />
-      <ProductAttributes {...product} />
+      <ProductAttributes {...product} user={user} />
     </>
   );
 }

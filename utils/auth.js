@@ -15,3 +15,9 @@ export function redirectUser(ctx, location) {
     router.push(location);
   }
 }
+
+// remove the token
+export const handleLogout = (token) => {
+  cookie.remove('token');
+  router.push('/login');
+};
