@@ -7,7 +7,7 @@ function ProductList({ products }) {
       image: product.mediaUrl,
       meta: `$${product.price}`,
       color: 'teal',
-      fluid: 'true',
+      fluid: true,
       childKey: product._id,
       href: `/product/${product._id}`,
     }));
