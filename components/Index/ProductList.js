@@ -7,19 +7,21 @@ function ProductList({ products }) {
       image: product.mediaUrl,
       meta: `$${product.price}`,
       color: 'teal',
-      fluid: true,
+      fluid: 'true',
       childKey: product._id,
       href: `/product/${product._id}`,
     }));
   }
 
   return (
-    <Card.Group
-      stackable
-      itemsPerRow='3'
-      centered
-      items={mapProductsToItems(products)}
-    />
+    <>
+      <Card.Group
+        stackable
+        itemsPerRow='3'
+        centered
+        items={mapProductsToItems(products)}
+      />
+    </>
   );
 }
 

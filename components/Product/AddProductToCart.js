@@ -41,37 +41,39 @@ function AddProductToCart({ user, productId }) {
   };
 
   return (
-    <Input
-      type='number'
-      min='1'
-      value={quantity}
-      onChange={(e) => setQuantity(Number(e.target.value))}
-      placeholder='quantity'
-      action={
-        user && success
-          ? {
-              color: 'blue',
-              content: 'Item added',
-              icon: 'plus cart',
-              disabled: true,
-            }
-          : user
-          ? {
-              color: 'orange',
-              content: 'Add To Cart',
-              icon: 'plus cart',
-              loading: loading,
-              disabled: loading,
-              onClick: handleAddProductToCart,
-            }
-          : {
-              color: 'blue',
-              content: 'Sign up to purchase',
-              icon: 'signup',
-              onClick: () => router.push('/signup'),
-            }
-      }
-    />
+    <>
+      <Input
+        type='number'
+        min='1'
+        value={quantity}
+        onChange={(e) => setQuantity(Number(e.target.value))}
+        placeholder='quantity'
+        action={
+          user && success
+            ? {
+                color: 'blue',
+                content: 'Item added',
+                icon: 'plus cart',
+                disabled: true,
+              }
+            : user
+            ? {
+                color: 'orange',
+                content: 'Add To Cart',
+                icon: 'plus cart',
+                loading: loading,
+                disabled: loading,
+                onClick: handleAddProductToCart,
+              }
+            : {
+                color: 'blue',
+                content: 'Sign up to purchase',
+                icon: 'signup',
+                onClick: () => router.push('/signup'),
+              }
+        }
+      />
+    </>
   );
 }
 

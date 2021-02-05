@@ -10,7 +10,7 @@ const Cart = ({ products, user }) => {
   return (
     <Segment>
       <CartItemList products={products} user={user} />
-      <CartSummary />
+      <CartSummary products={products} />
     </Segment>
   );
 };

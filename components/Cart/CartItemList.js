@@ -4,6 +4,31 @@ import { useRouter } from 'next/router';
 function CartItemList({ products, user }) {
   const router = useRouter();
   // const user = true;
+
+  function mapCartToProducts(products) {
+    return products.map((p) => ({
+      childKey: p.product._id,
+      header: (
+        <Item.Header
+          as='a'
+          onClick={() => router.push(`/product/${p.product._id}`)}
+        >
+          {p.product.name}
+        </Item.Header>
+      ),
+      image: p.product.mediaUrl,
+      meta: `${p.quantity} x ${p.product.price}`,
+      fluid: 'true',
+      extra: (
+        <Button
+          basic
+          icon='remove'
+          floated='right'
+          onClick={() => console.log(p.product._id)}
+        />
+      ),
+    }));
+  }
   if (products.length === 0) {
     return (
       <Segment secondary color='yellow' inverted textAlign='center' placeholder>
@@ -25,7 +50,7 @@ function CartItemList({ products, user }) {
       </Segment>
     );
   }
-  // return <Item.Group items={}></Item.Group>;
+  return <Item.Group divided items={mapCartToProducts(products)}></Item.Group>;
 }
 
 export default CartItemList;
