@@ -10,8 +10,8 @@ function Product({ product, user }) {
 
   return (
     <>
-      <ProductSummary {...product} />
-      <ProductAttributes {...product} user={user} />
+      <ProductSummary user={user} {...product} />
+      <ProductAttributes user={user} {...product} />
     </>
   );
 }

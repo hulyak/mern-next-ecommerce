@@ -5,7 +5,22 @@ import connectDb from '../../utils/connectDb';
 
 connectDb();
 
+const { ObjectId } = mongoose.Types;
+
 export default async (req, res) => {
+  switch (req.method) {
+    case 'GET':
+      await handleGetRequest(req, res);
+      break;
+    case 'PUT':
+      await handlePutRequest(req, res);
+      break;
+    default:
+      res.status(405).send(`Method ${req.method} not allowed`);
+  }
+};
+
+async function handleGetRequest(req, res) {
   if (!('authorization' in req.headers)) {
     return res.status(401).send('No authorization token');
   }
@@ -23,4 +38,43 @@ export default async (req, res) => {
     console.error(err);
     res.status(403).send('Please login again');
   }
-};
+}
+
+async function handlePutRequest(req, res) {
+  const { quantity, productId } = req.body;
+  if (!('authorization' in req.headers)) {
+    return res.status(401).send('No authorization token');
+  }
+  try {
+    const { userId } = jwt.verify(
+      req.headers.authorization,
+      process.env.JWT_SECRET
+    );
+
+    // Get user cart on userId
+    const cart = await Cart.findOne({ user: userId });
+    // Check if product already exists in cart
+    const productExists = cart.products.some((el) =>
+      ObjectId(productId).equals(el.product)
+    );
+    // If so, increment quantity (by number provided to request)
+    if (productExists) {
+      // update a given document
+      await Cart.findOneAndUpdate(
+        { _id: cart._id, 'products.product': productId },
+        { $inc: { 'products.$.quantity': quantity } }
+      );
+      // If not, add new product with given quantity
+    } else {
+      const newProduct = { quantity, product: productId };
+      await Cart.findOneAndUpdate(
+        { _id: cart._id },
+        { $addToSet: { products: newProduct } }
+      );
+    }
+    res.status(200).send('Cart updated');
+  } catch (err) {
+    console.error(err);
+    res.status(403).send('Please login again');
+  }
+}
