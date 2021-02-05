@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Input } from 'semantic-ui-react';
-import baseUrl from '../../utils/baseUrl';
-import cookie, { set } from 'js-cookie';
+import cookie from 'js-cookie';
 import axios from 'axios';
 import catchErrors from '../../utils/catchErrors';
+import baseUrl from '../../utils/baseUrl';
 
 function AddProductToCart({ user, productId }) {
   const router = useRouter();
@@ -39,40 +39,39 @@ function AddProductToCart({ user, productId }) {
       setLoading(false);
     }
   };
+
   return (
-    <>
-      <Input
-        type='number'
-        min='1'
-        value={quantity}
-        onChange={(e) => setQuantity(Number(e.target.value))}
-        placeholder='quantity'
-        action={
-          user && success
-            ? {
-                color: 'blue',
-                content: 'Item added',
-                icon: 'plus cart',
-                disabled: true,
-              }
-            : user
-            ? {
-                color: 'orange',
-                content: 'Add To Cart',
-                icon: 'plus cart',
-                loading,
-                disabled: loading,
-                onClick: handleAddProductToCart,
-              }
-            : {
-                color: 'blue',
-                content: 'Sign up to purchase',
-                icon: 'signup',
-                onClick: () => router.push('/signup'),
-              }
-        }
-      />
-    </>
+    <Input
+      type='number'
+      min='1'
+      value={quantity}
+      onChange={(e) => setQuantity(Number(e.target.value))}
+      placeholder='quantity'
+      action={
+        user && success
+          ? {
+              color: 'blue',
+              content: 'Item added',
+              icon: 'plus cart',
+              disabled: true,
+            }
+          : user
+          ? {
+              color: 'orange',
+              content: 'Add To Cart',
+              icon: 'plus cart',
+              loading: loading,
+              disabled: loading,
+              onClick: handleAddProductToCart,
+            }
+          : {
+              color: 'blue',
+              content: 'Sign up to purchase',
+              icon: 'signup',
+              onClick: () => router.push('/signup'),
+            }
+      }
+    />
   );
 }
 

@@ -5,17 +5,15 @@ import { parseCookies } from 'nookies';
 import baseUrl from '../utils/baseUrl';
 import axios from 'axios';
 
-const Cart = ({ products }) => {
+const Cart = ({ products, user }) => {
   console.log(products);
   return (
     <Segment>
-      <CartItemList />
+      <CartItemList products={products} user={user} />
       <CartSummary />
     </Segment>
   );
 };
-
-export default Cart;
 
 // authenticated request
 export async function getServerSideProps(context) {
@@ -28,3 +26,5 @@ export async function getServerSideProps(context) {
   const res = await axios.get(url, payload);
   return { props: { products: res.data } };
 }
+
+export default Cart;
