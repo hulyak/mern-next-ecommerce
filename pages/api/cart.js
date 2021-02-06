@@ -40,7 +40,7 @@ async function handleGetRequest(req, res) {
     res.status(200).json(cart.products);
   } catch (err) {
     console.error(err);
-    res.status(403).send('Please login again');
+    // console.log(status(403).send('Please login again'));
   }
 }
 

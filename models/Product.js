@@ -26,7 +26,6 @@ const ProductsSchema = mongoose.Schema({
 });
 
 // if we have already a Product model use it otherwise create a new one.
-const Product =
-  mongoose.models.Product || mongoose.model('Product', ProductsSchema);
 
-export default Product;
+export default mongoose.models.Product ||
+  mongoose.model('Product', ProductsSchema);
