@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import shortId from 'shortId';
+import { nanoid } from 'nanoid';
 
 const ProductsSchema = mongoose.Schema({
   name: {
@@ -13,7 +13,7 @@ const ProductsSchema = mongoose.Schema({
   sku: {
     type: String,
     unique: true,
-    default: shortId.generate(),
+    default: nanoid(),
   },
   description: {
     type: String,
