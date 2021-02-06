@@ -5,6 +5,7 @@ function catchErrors(error, displayError) {
     // the request was made and the server responded with a status code that is not in the range of 2XX
     errorMessage = error.response.data;
     console.error('Error message: ', errorMessage);
+
     // For Cloudinary image uploads
     if (error.response.data.error) {
       errorMessage = error.response.data.error.message;

@@ -69,7 +69,7 @@ function CartItemList({ products, user, handleRemoveFromCart, success }) {
       </Segment>
     );
   }
-  return <Item.Group divided items={mapCartToProducts(products)}></Item.Group>;
+  return <Item.Group divided items={mapCartToProducts(products)} />;
 }
 
 export default CartItemList;

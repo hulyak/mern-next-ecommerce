@@ -3,24 +3,22 @@ import formatDate from '../../utils/formatDate';
 
 function AccountHeader({ role, email, name, createdAt }) {
   return (
-    <>
-      <Segment secondary inverted color='orange'>
-        <Label
-          color='yellow'
-          size='large'
-          ribbon
-          icon='privacy'
-          style={{ textTransform: 'capitalize' }}
-          content={role}
-        />
-        <Header inverted textAlign='center' as='h1' icon>
-          <Icon name='user' />
-          {name}
-          <Header.Subheader>{email}</Header.Subheader>
-          <Header.Subheader>Joined {formatDate(createdAt)}</Header.Subheader>
-        </Header>
-      </Segment>
-    </>
+    <Segment secondary inverted color='orange'>
+      <Label
+        color='yellow'
+        size='large'
+        ribbon
+        icon='privacy'
+        style={{ textTransform: 'capitalize' }}
+        content={role}
+      />
+      <Header inverted textAlign='center' as='h1' icon>
+        <Icon name='user' />
+        {name}
+        <Header.Subheader>{email}</Header.Subheader>
+        <Header.Subheader>Joined {formatDate(createdAt)}</Header.Subheader>
+      </Header>
+    </Segment>
   );
 }
 

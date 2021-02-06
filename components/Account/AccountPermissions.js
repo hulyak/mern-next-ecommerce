@@ -1,8 +1,8 @@
-import axios from 'axios';
-import baseUrl from '../../utils/baseUrl';
-import cookie from 'js-cookie';
 import { useEffect, useRef, useState } from 'react';
+import axios from 'axios';
+import cookie from 'js-cookie';
 import { Checkbox, Header, Icon, Table } from 'semantic-ui-react';
+import baseUrl from '../../utils/baseUrl';
 import formatDate from '../../utils/formatDate';
 
 function AccountPermissions() {

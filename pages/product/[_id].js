@@ -1,13 +1,9 @@
-// import { useRouter } from 'next/router';
 import axios from 'axios';
 import ProductAttributes from '../../components/Product/ProductAttributes';
 import ProductSummary from '../../components/Product/ProductSummary';
 import baseUrl from '../../utils/baseUrl';
 
 function Product({ product, user }) {
-  // const router = useRouter();
-  // const { _id } = router.query;
-
   return (
     <>
       <ProductSummary user={user} {...product} />
