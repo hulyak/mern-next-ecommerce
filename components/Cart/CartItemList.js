@@ -10,9 +10,10 @@ import { useRouter } from 'next/router';
 
 function CartItemList({ products, user, handleRemoveFromCart, success }) {
   const router = useRouter();
-  // const user = true;
+  // const pruser = true;
 
   function mapCartToProducts(products) {
+    console.log(products);
     return products.map((p) => ({
       childKey: p.product._id,
       header: (
