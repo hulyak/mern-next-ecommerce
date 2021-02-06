@@ -1,7 +1,7 @@
 {
-  "name": "mern-ecommerce",
+  "name": "next-shop",
   "version": "1.0.0",
-  "description": "Project for MERN Stack",
+  "description": "E-commerce project with Full Stack Next",
   "main": "index.js",
   "scripts": {
     "dev": "next",
@@ -27,7 +27,6 @@
     "shortid": "^2.2.16",
     "stripe": "^8.132.0",
     "uuid": "^8.3.2",
-    "uuidv4": "^6.2.6",
     "validator": "^13.5.2"
   }
 }

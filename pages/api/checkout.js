@@ -1,5 +1,5 @@
 import Stripe from 'stripe';
-import { uuid } from 'uuidv4';
+import { v4 as uuidv4 } from 'uuid';
 import jwt from 'jsonwebtoken';
 import Cart from '../../models/Cart';
 import calculateCartTotal from '../../utils/calculateCartTotal';
@@ -49,7 +49,7 @@ export default async (req, res) => {
         description: `Checkout | ${paymentData.email} | ${paymentData.id} `,
       },
       {
-        idempotency_key: uuid(),
+        idempotencyKey: uuidv4(),
       }
     );
     // 7) Add order data to database

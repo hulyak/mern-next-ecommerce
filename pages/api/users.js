@@ -7,9 +7,10 @@ export default async (req, res) => {
       req.headers.authorization,
       process.env.JWT_SECRET
     );
-    const users = await User.find(
-      { _id: { $ne: userId } }.sort({ role: 'asc' })
-    );
+    const users = await User.find({ _id: { $ne: userId } }).sort({
+      role: 'asc',
+    });
+
     res.status(200).json(users);
   } catch (err) {
     console.error(err);

@@ -12,9 +12,7 @@ export default async (req, res) => {
     );
 
     const orders = await Order.find({ user: userId })
-      .sort({
-        createdAt: 'desc',
-      })
+      .sort({ createdAt: 'desc' })
       .populate({
         path: 'products.product',
         model: 'Product',
